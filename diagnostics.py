@@ -1,4 +1,4 @@
-"""Diagnostics support for Forecast.Solar integration."""
+"""Diagnostics support for Forecast.Solar.Horizon integration."""
 
 from __future__ import annotations
 
