@@ -1,0 +1,12 @@
+{
+  "domain": "forecast_solar_horizon",
+  "name": "Forecast.Solar.Horizon",
+  "version": "rc0.2.1",
+  "codeowners": ["@lustigeperson"],
+  "config_flow": true,
+  "documentation": "https://github.com/LustigePerson/forecast_solar_horizon/",
+  "issue_tracker": "https://github.com/LustigePerson/forecast_solar_horizon/issues",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": ["forecast-solar==4.0.0"]
+}
