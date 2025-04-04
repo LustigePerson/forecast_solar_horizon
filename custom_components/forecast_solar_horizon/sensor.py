@@ -1,4 +1,4 @@
-"""Support for the Forecast.Solar sensor service."""
+"""Support for the Forecast.Solar.Horizon sensor service."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ from .coordinator import ForecastSolarDataUpdateCoordinator
 
 @dataclass(frozen=True)
 class ForecastSolarSensorEntityDescription(SensorEntityDescription):
-    """Describes a Forecast.Solar Sensor."""
+    """Describes a Forecast.Solar.Horizon Sensor."""
 
     state: Callable[[Estimate], Any] | None = None
 
@@ -153,7 +153,7 @@ async def async_setup_entry(
 class ForecastSolarSensorEntity(
     CoordinatorEntity[ForecastSolarDataUpdateCoordinator], SensorEntity
 ):
-    """Defines a Forecast.Solar sensor."""
+    """Defines a Forecast.Solar.Horizon sensor."""
 
     entity_description: ForecastSolarSensorEntityDescription
     _attr_has_entity_name = True
@@ -165,7 +165,7 @@ class ForecastSolarSensorEntity(
         coordinator: ForecastSolarDataUpdateCoordinator,
         entity_description: ForecastSolarSensorEntityDescription,
     ) -> None:
-        """Initialize Forecast.Solar sensor."""
+        """Initialize Forecast.Solar.Horizon sensor."""
         super().__init__(coordinator=coordinator)
         self.entity_description = entity_description
         self.entity_id = f"{SENSOR_DOMAIN}.{entity_description.key}"
@@ -174,7 +174,7 @@ class ForecastSolarSensorEntity(
         self._attr_device_info = DeviceInfo(
             entry_type=DeviceEntryType.SERVICE,
             identifiers={(DOMAIN, entry_id)},
-            manufacturer="Forecast.Solar",
+            manufacturer="Forecast.Solar.Horizon",
             model=coordinator.data.account_type.value,
             name="Solar production forecast",
             configuration_url="https://forecast.solar",

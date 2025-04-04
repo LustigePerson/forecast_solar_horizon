@@ -1,10 +1,10 @@
-"""Constants for the Forecast.Solar integration."""
+"""Constants for the Forecast.Solar.Horizon integration."""
 
 from __future__ import annotations
 
 import logging
 
-DOMAIN = "forecast_solar"
+DOMAIN = "forecast_solar_horizon"
 LOGGER = logging.getLogger(__package__)
 
 CONF_DECLINATION = "declination"
@@ -14,3 +14,4 @@ CONF_DAMPING = "damping"
 CONF_DAMPING_MORNING = "damping_morning"
 CONF_DAMPING_EVENING = "damping_evening"
 CONF_INVERTER_SIZE = "inverter_size"
+CONF_HORIZON = "horizon"

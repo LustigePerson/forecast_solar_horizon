@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for the Forecast.Solar integration."""
+"""DataUpdateCoordinator for the Forecast.Solar.Horizon integration."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from .const import (
     CONF_DAMPING_EVENING,
     CONF_DAMPING_MORNING,
     CONF_DECLINATION,
+    CONF_HORIZON,
     CONF_INVERTER_SIZE,
     CONF_MODULES_POWER,
     DOMAIN,
@@ -27,12 +28,12 @@ type ForecastSolarConfigEntry = ConfigEntry[ForecastSolarDataUpdateCoordinator]
 
 
 class ForecastSolarDataUpdateCoordinator(DataUpdateCoordinator[Estimate]):
-    """The Forecast.Solar Data Update Coordinator."""
+    """The Forecast.Solar.Horizon Data Update Coordinator."""
 
     config_entry: ForecastSolarConfigEntry
 
     def __init__(self, hass: HomeAssistant, entry: ForecastSolarConfigEntry) -> None:
-        """Initialize the Forecast.Solar coordinator."""
+        """Initialize the Forecast.Solar.Horizon coordinator."""
 
         # Our option flow may cause it to be an empty string,
         # this if statement is here to catch that.
@@ -54,6 +55,7 @@ class ForecastSolarDataUpdateCoordinator(DataUpdateCoordinator[Estimate]):
             damping_morning=entry.options.get(CONF_DAMPING_MORNING, 0.0),
             damping_evening=entry.options.get(CONF_DAMPING_EVENING, 0.0),
             inverter=inverter_size,
+            horizon=entry.options.get(CONF_HORIZON, None),
         )
 
         # Free account have a resolution of 1 hour, using that as the default
@@ -71,7 +73,7 @@ class ForecastSolarDataUpdateCoordinator(DataUpdateCoordinator[Estimate]):
         )
 
     async def _async_update_data(self) -> Estimate:
-        """Fetch Forecast.Solar estimates."""
+        """Fetch Forecast.Solar.Horizon estimates."""
         try:
             return await self.forecast.estimate()
         except ForecastSolarConnectionError as error:

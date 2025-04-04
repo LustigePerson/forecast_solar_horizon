@@ -1,4 +1,4 @@
-"""The Forecast.Solar integration."""
+"""The Forecast.Solar.Horizon integration."""
 
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ async def async_migrate_entry(
 async def async_setup_entry(
     hass: HomeAssistant, entry: ForecastSolarConfigEntry
 ) -> bool:
-    """Set up Forecast.Solar from a config entry."""
+    """Set up Forecast.Solar.Horizon from a config entry."""
     coordinator = ForecastSolarDataUpdateCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
 

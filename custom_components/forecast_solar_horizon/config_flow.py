@@ -1,4 +1,4 @@
-"""Config flow for Forecast.Solar integration."""
+"""Config flow for Forecast.Solar.Horizon integration."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from .const import (
     CONF_DAMPING_EVENING,
     CONF_DAMPING_MORNING,
     CONF_DECLINATION,
+    CONF_HORIZON,
     CONF_INVERTER_SIZE,
     CONF_MODULES_POWER,
     DOMAIN,
@@ -31,7 +32,7 @@ RE_API_KEY = re.compile(r"^[a-zA-Z0-9]{16}$")
 
 
 class ForecastSolarFlowHandler(ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Forecast.Solar."""
+    """Handle a config flow for Forecast.Solar.Horizon."""
 
     VERSION = 2
 
@@ -150,6 +151,14 @@ class ForecastSolarOptionFlowHandler(OptionsFlow):
                             )
                         },
                     ): vol.Coerce(int),
+                    vol.Optional(
+                        CONF_HORIZON,
+                        description={
+                            "suggested_value": self.config_entry.options.get(
+                                CONF_HORIZON
+                            )
+                        },
+                    ): vol.Coerce(str),
                 }
             ),
             errors=errors,
