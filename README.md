@@ -4,6 +4,11 @@
 
 A custom component for Home Assistant that provides solar production forecasts with horizon support. This is a fork of the official [Forecast.Solar integration](https://www.home-assistant.io/integrations/forecast_solar/) with added horizon profile support.
 
+Solves:
+
+- https://github.com/home-assistant/core/pull/113894
+- https://github.com/home-assistant/core/pull/78326
+
 ## Features
 
 - Provides solar production forecasts based on your solar panel configuration
