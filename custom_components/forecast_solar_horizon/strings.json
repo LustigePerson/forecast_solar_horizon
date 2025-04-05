@@ -36,37 +36,37 @@
   },
   "entity": {
     "sensor": {
-      "energy_production_today": {
+      "energy_production_today_hz": {
         "name": "Estimated energy production - today"
       },
-      "energy_production_today_remaining": {
+      "energy_production_today_remaining_hz": {
         "name": "Estimated energy production - remaining today"
       },
-      "energy_production_tomorrow": {
+      "energy_production_tomorrow_hz": {
         "name": "Estimated energy production - tomorrow"
       },
-      "power_highest_peak_time_today": {
+      "power_highest_peak_time_today_hz": {
         "name": "Highest power peak time - today"
       },
-      "power_highest_peak_time_tomorrow": {
+      "power_highest_peak_time_tomorrow_hz": {
         "name": "Highest power peak time - tomorrow"
       },
-      "power_production_now": {
+      "power_production_now_hz": {
         "name": "Estimated power production - now"
       },
-      "power_production_next_hour": {
+      "power_production_next_hour_hz": {
         "name": "Estimated power production - next hour"
       },
-      "power_production_next_12hours": {
+      "power_production_next_12hours_hz": {
         "name": "Estimated power production - next 12 hours"
       },
-      "power_production_next_24hours": {
+      "power_production_next_24hours_hz": {
         "name": "Estimated power production - next 24 hours"
       },
-      "energy_current_hour": {
+      "energy_current_hour_hz": {
         "name": "Estimated energy production - this hour"
       },
-      "energy_next_hour": {
+      "energy_next_hour_hz": {
         "name": "Estimated energy production - next hour"
       }
     }

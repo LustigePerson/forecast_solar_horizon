@@ -37,8 +37,8 @@ class ForecastSolarSensorEntityDescription(SensorEntityDescription):
 
 SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
     ForecastSolarSensorEntityDescription(
-        key="energy_production_today",
-        translation_key="energy_production_today",
+        key="energy_production_today_hz",
+        translation_key="energy_production_today_hz",
         state=lambda estimate: estimate.energy_production_today,
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
@@ -46,8 +46,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         suggested_display_precision=1,
     ),
     ForecastSolarSensorEntityDescription(
-        key="energy_production_today_remaining",
-        translation_key="energy_production_today_remaining",
+        key="energy_production_today_remaining_hz",
+        translation_key="energy_production_today_remaining_hz",
         state=lambda estimate: estimate.energy_production_today_remaining,
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
@@ -55,8 +55,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         suggested_display_precision=1,
     ),
     ForecastSolarSensorEntityDescription(
-        key="energy_production_tomorrow",
-        translation_key="energy_production_tomorrow",
+        key="energy_production_tomorrow_hz",
+        translation_key="energy_production_tomorrow_hz",
         state=lambda estimate: estimate.energy_production_tomorrow,
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
@@ -64,26 +64,26 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         suggested_display_precision=1,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_highest_peak_time_today",
-        translation_key="power_highest_peak_time_today",
+        key="power_highest_peak_time_today_hz",
+        translation_key="power_highest_peak_time_today_hz",
         device_class=SensorDeviceClass.TIMESTAMP,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_highest_peak_time_tomorrow",
-        translation_key="power_highest_peak_time_tomorrow",
+        key="power_highest_peak_time_tomorrow_hz",
+        translation_key="power_highest_peak_time_tomorrow_hz",
         device_class=SensorDeviceClass.TIMESTAMP,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_production_now",
-        translation_key="power_production_now",
+        key="power_production_now_hz",
+        translation_key="power_production_now_hz",
         device_class=SensorDeviceClass.POWER,
         state=lambda estimate: estimate.power_production_now,
         state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfPower.WATT,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_production_next_hour",
-        translation_key="power_production_next_hour",
+        key="power_production_next_hour_hz",
+        translation_key="power_production_next_hour_hz",
         state=lambda estimate: estimate.power_production_at_time(
             estimate.now() + timedelta(hours=1)
         ),
@@ -92,8 +92,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.WATT,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_production_next_12hours",
-        translation_key="power_production_next_12hours",
+        key="power_production_next_12hours_hz",
+        translation_key="power_production_next_12hours_hz",
         state=lambda estimate: estimate.power_production_at_time(
             estimate.now() + timedelta(hours=12)
         ),
@@ -102,8 +102,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.WATT,
     ),
     ForecastSolarSensorEntityDescription(
-        key="power_production_next_24hours",
-        translation_key="power_production_next_24hours",
+        key="power_production_next_24hours_hz",
+        translation_key="power_production_next_24hours_hz",
         state=lambda estimate: estimate.power_production_at_time(
             estimate.now() + timedelta(hours=24)
         ),
@@ -112,8 +112,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.WATT,
     ),
     ForecastSolarSensorEntityDescription(
-        key="energy_current_hour",
-        translation_key="energy_current_hour",
+        key="energy_current_hour_hz",
+        translation_key="energy_current_hour_hz",
         state=lambda estimate: estimate.energy_current_hour,
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
@@ -121,8 +121,8 @@ SENSORS: tuple[ForecastSolarSensorEntityDescription, ...] = (
         suggested_display_precision=1,
     ),
     ForecastSolarSensorEntityDescription(
-        key="energy_next_hour",
-        translation_key="energy_next_hour",
+        key="energy_next_hour_hz",
+        translation_key="energy_next_hour_hz",
         state=lambda estimate: estimate.sum_energy_production(1),
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
@@ -184,9 +184,9 @@ class ForecastSolarSensorEntity(
     def native_value(self) -> datetime | StateType:
         """Return the state of the sensor."""
         if self.entity_description.state is None:
-            state: StateType | datetime = getattr(
-                self.coordinator.data, self.entity_description.key
-            )
+            # Remove the "_hz" suffix when accessing coordinator.data attributes
+            attribute_key = self.entity_description.key.replace("_hz", "")
+            state: StateType | datetime = getattr(self.coordinator.data, attribute_key)
         else:
             state = self.entity_description.state(self.coordinator.data)
 
